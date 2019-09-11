@@ -49,14 +49,43 @@ Na camada de rede, são implementados serviços de comunicação hospedeiro a ho
 Portanto, há "pedaços" da camada em cada um de seus hospedeiros e roteadores na rede.
 \\
 \\
-É necessário distinguir as funções de repasse e roteamento, onde o primeiro envolve a transferência de um pacote de um enlace
+É necessário distinguir as funções de \textbf{repasse e roteamento}, onde o primeiro envolve a transferência de um pacote de um enlace
 de entrada para um elance de saída. Já o segundo, envolve todos os roteadores de uma rede, onde os caminhos que os pacotes 
 percorrem serão determinados por protocolos.
-\\
-\\
-\subsection{Repasse}
-Quando um pacote chega num roteador, este deve encaminhar até a saída apropriada.
-Dado um pacote — proveniente de um hospedeiro H1 — que chega ao roteador R1 com destino à um hospedeiro H2, deve ser 
-repassado ao roteador seguinte até chegar em seu destino.
+
+\subsection{Repasse e Roteamento}
+O papel da camada de rede é \textbf{ transportar os pacotes de um hospedeiro origem até um hospedeiro destinatário}.
+
+    \subsubsection{Repasse}
+        Quando um pacote chega num roteador, este deve encaminhar até a saída apropriada.
+        Dado um pacote — proveniente de um hospedeiro H1 — que chega ao roteador R1 com destino a um hospedeiro H2, deve ser 
+        repassado ao roteador seguinte até chegar em seu destino.
+
+    \subsubsection{Roteamento}
+        A camada de rede deve determinar a rota em que um pacote flui de seu remetente à seu destinatário. Os responsáveis por essas
+        atividads são os \textbf{algoritmos de roteamento}. Nesse caso, um algoritmo definiria o caminho entre dois hospedeiros em que
+        os pacotes seguirão.
+
+\subsection{Modelos de Serviço de rede}
+
+Um modelo de serviço de rede define características pertinentes ao transporte dos dados \textbf{ fim a fim entre bordas da rede}.
+Visto isso, o modelo poderia prover alguns serviços como: \textit{Entrega garantida, entrega garantida com atraso limitado, 
+entrega de pacotes em ordem, largura de banda mínima garantida, Jitter e serviços de segurança.}
+
+    \subsubsection{Arquitetura de rede: Internet}
+    Possui o modelo de serviço \textit{melhor esforço}, com \textbf{nenhuma} garantia de \textit{largura de banda} e \textit{contra perda}.
+    Seu \textit{ordenamento} é feito em \textbf{qualquer ordem possível} sem manter \textit{temporização} com \textbf{nenhuma} 
+    \textit{indicação de congestionamento}
+
+    \subsubsection{Arquitetura de rede: ATM}
+    Possui o modelo de serviço \textit{CBR}, com \textbf{taxa constante} de garantia de \textit{largura de banda} e possuí 
+    \textit{garantia contra perda}.
+    Seu \textit{ordenamento} é feito em \textbf{ordem} mantendo \textit{temporização} com \textbf{garantia de que não ocorrerá} 
+    \textit{congestionamento}
+
+    \subsubsection{Arquitetura de rede: ATM}
+    Possui o modelo de serviço \textit{ABR}, com \textbf{taxa mínima} de garantia de \textit{largura de banda} e \textbf{não possuí} 
+    \textit{garantia contra perda}.
+    Seu \textit{ordenamento} é feito em \textbf{ordem}, mas sem \textit{temporização} com \textbf{garantia de congestionamento} 
 
 \end{document}
