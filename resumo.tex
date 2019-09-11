@@ -96,7 +96,7 @@ de camada de rede orientados para conexão e não orientados para conexão.
 \\
 Um serviço orientado para conexão começa com uma apresentação entre os hospedeiros de origem e destino. Já o não orientado, não possui 
 apresentação alguma.
-\subsection{Redes de Circuitos Virtuais}
+\subsection{Redes de Circuitos Virtuais - Orientado para conexão}
 Um circuito virtual é basicamente um caminho (série de enlaces e roteadores) entre hospedeiros de origem e destino. O qual contém
 um número para cada enlace e registros da tabela de repasse em cada roteador ao longo do caminho.
 
@@ -104,15 +104,18 @@ um número para cada enlace e registros da tabela de repasse em cada roteador ao
     O estabelecimento de um circuito virtual é consistido por três fases:
         \\
         \\*
-        1. \textbf{Estabelecimento de CV}: A camada de transporte remetente contata a camada de rede especificando o endereço do destinatário.
+        I. \textbf{Estabelecimento de CV}: A camada de transporte remetente contata a camada de rede especificando o endereço do destinatário.
         Depois, a camada de rede determina o caminho entre o remetente e destinatário.
         \\
         \\*
-        2. \textbf{Transferência de dados}: Fluxo dos pacotes entre os hospedeiros.
+        II. \textbf{Transferência de dados}: Fluxo dos pacotes entre os hospedeiros.
         \\
         \\*
-        3. \textbf{Encerramento do CV}: O encerramento começa quando um dos hospedeiros avisa à camada de rede seu desejo de desativar o CV.
+        III. \textbf{Encerramento do CV}: O encerramento começa quando um dos hospedeiros avisa à camada de rede seu desejo de desativar o CV.
         A camada de rede então, informa ao sistema final do outro lado sob o fim da conexão e atualiza as tabelas de repasse de cada um dos
         roteadores.
+
+\subsection{Rede de Datagramas - Não orientados para conexão}
+
 
 \end{document}
