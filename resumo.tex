@@ -89,6 +89,7 @@ entrega de pacotes em ordem, largura de banda mínima garantida, Jitter e servi�
     Seu \textit{ordenamento} é feito em \textbf{ordem}, mas sem \textit{temporização} com \textbf{garantia de congestionamento} 
 
 \newpage
+
 \section{Redes de Circuitos Virtuais e Datagramas}
 A camada de rede também oferece dois serviços para as aplicações, semelhantes aos que a camada de transporte oferece. Que são: serviços 
 de camada de rede orientados para conexão e não orientados para conexão.
@@ -118,6 +119,35 @@ hospedeiros de origem e destino. O qual contém um número para cada enlace e re
 \subsection{Rede de Datagramas}
 Uma rede de Datagramas é um serviço não orientado a conexão, quando um sistema final quer enviar um pacote, ele informa no pacote
 o endereço do de destino e posteriormente o envia pra dentro da rede. Nesse, cenário, a rota em que fluxo dos pacotes seguirão está definida
-na tabela de repasse do roteador.
+na tabela de repasse dos roteadores. Nesta rede, os pacotes atraavessam vários roteadores, onde cada roteador utiliza o endereço de destino do 
+pacote para transmitir a uma saída.
+
+\newpage
+\section{O que há dentro do roteador?}
+O roteador possui várias portas de entradas e saídas, que são regidas pelo elemento de comutação, o qual é constituido por um processador de
+roteamento.
+
+\subsection{Porta de Entrada}
+O processamento na porta de entrada começa pela terminação de linha, em seguida é efetuado o processamento de enlace, logo após a consulta e o
+enfileiramento de repasse para a porta apropriada para poder entregar ao elemento de comutação.
+
+\subsection{Elemento de Comutação}
+Elemento/dispositivo que efetua a permutação da porta de entrada para a porta de saída.
+\\
+\\*
+Essa comutação pode ser feita de várias formas: \textit{por memório, barramento ou por uma rede de interconexão}
+
+\subsubsection{Comutação por Memória}
+O primeiros roteadores, em sua maioria, eram computadores tradicionais. Portanto, a comutação entre as portas de entrada e saída era realizada 
+sob o controle direto da CPU. Nesse cenário, as portas funcionavam como dispositivos de entrada e saída de um SO tradicional.
+
+\subsubsection{Comutação por Barramento}
+Nessa abordagem, as portas de entrada transferem um pacote diretamente para a porta de saída por um barramento compartilhado sem a intervenção
+do processador de roteamento. No entanto, somente um pacote por vez pode ser transferido, uma vez que o barramento encontra-se ocupado.
+
+\subsubsection{Comutação por Rede de Interconexão}
+Nessa abordagem, as portas de entrada transferem um pacote diretamente para a porta de saída por um barramento compartilhado sem a intervenção
+do processador de roteamento. No entanto, somente um pacote por vez pode ser transferido.
+
 
 \end{document}
