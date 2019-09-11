@@ -128,7 +128,7 @@ O roteador possui várias portas de entradas e saídas, que são regidas pelo el
 roteamento.
 
 \subsection{Porta de Entrada}
-O processamento na porta de entrada começa pela terminação de linha, em seguida é efetuado o processamento de enlace, logo após a consulta e o
+O processamento na porta de entrada começa pela terminação de linha, em seguida é efetuado o desencapsulamento dos pacotes, logo após a consulta e o
 enfileiramento de repasse para a porta apropriada para poder entregar ao elemento de comutação.
 
 \subsection{Elemento de Comutação}
@@ -146,8 +146,12 @@ Nessa abordagem, as portas de entrada transferem um pacote diretamente para a po
 do processador de roteamento. No entanto, somente um pacote por vez pode ser transferido, uma vez que o barramento encontra-se ocupado.
 
 \subsubsection{Comutação por Rede de Interconexão}
-Nessa abordagem, as portas de entrada transferem um pacote diretamente para a porta de saída por um barramento compartilhado sem a intervenção
-do processador de roteamento. No entanto, somente um pacote por vez pode ser transferido.
+Quase como a comutação por barramento, o que diferencia-se é a quantidade de barramentos, nesse caso são utilizado 2 ou mais, onde cada um 
+desses barramentos conectam \textbf{n} portas de entrada com \textbf{n} portas de saída
+
+\subsection{Porta de Saída}
+O processamento na porta de saída começa com o gerenciamento de fila feito por um buffer, em seguida é efetuado o encapsulamento dos pacotes e por 
+fim há a terminação de linha.
 
 
 \end{document}
