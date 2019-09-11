@@ -96,9 +96,9 @@ de camada de rede orientados para conexão e não orientados para conexão.
 \\
 Um serviço orientado para conexão começa com uma apresentação entre os hospedeiros de origem e destino. Já o não orientado, não possui 
 apresentação alguma.
-\subsection{Redes de Circuitos Virtuais - Orientado para conexão}
-Um circuito virtual é basicamente um caminho (série de enlaces e roteadores) entre hospedeiros de origem e destino. O qual contém
-um número para cada enlace e registros da tabela de repasse em cada roteador ao longo do caminho.
+\subsection{Redes de Circuitos Virtuais}
+Um circuito virtual é um serviço orientado pra conexão, onde trata-se basicamente de um caminho (série de enlaces e roteadores) entre 
+hospedeiros de origem e destino. O qual contém um número para cada enlace e registros da tabela de repasse em cada roteador ao longo do caminho.
 
     \subsubsection{Estabelecimento do Circuito virtual}
     O estabelecimento de um circuito virtual é consistido por três fases:
@@ -115,7 +115,8 @@ um número para cada enlace e registros da tabela de repasse em cada roteador ao
         A camada de rede então, informa ao sistema final do outro lado sob o fim da conexão e atualiza as tabelas de repasse de cada um dos
         roteadores.
 
-\subsection{Rede de Datagramas - Não orientados para conexão}
-
+\subsection{Rede de Datagramas}
+Uma rede de Datagramas é um serviço não orientado para conexão, quando um sistema final quer enviar um pacote, ele informa no pacote
+o endereço do de destino e posteriormente o envia pra dentro da rede.
 
 \end{document}
