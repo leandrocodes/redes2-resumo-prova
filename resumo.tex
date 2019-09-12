@@ -171,43 +171,117 @@ rede (ICMP).
     \subsection{Formato do datagrama}
     O datagrama desempenha um papel central na Internet.
 
-        \subsubsection{IPV4}
-        \textbf{\textit{Número da versão}}: São quatro bits que especificam a versão do protocolo IP do datagrama.
-        \\\\
-        \textbf{\textit{Comprimento do cabeçalho}}: O datagrama IPV4 pode conter um número variável de opções, esses quatro bits
-        são necessários para determinar onde os dados começam no pacote.
-        \\\\
-        \textbf{\textit{Tipo de serviço}}: Os bits de tipo de serviço servem para diferenciar os diferentes tipos de datagrama IP
-        que devem ser distinguidos uns dos outros.
-        \\\\
-        \textbf{\textit{Comprimento do datagrama (Fragmentação)}}:
-        É o comprimento total do datagrama IP medido em bytes. Esse campo tem 16 bits, então o tamanho máximo teórico do datagrama
-        IP é 65.535 bytes. No entano, raramente são maiores que 1.500 bytes.
-        \\\\
-        \textbf{\textit{Tempo de vida}}: É incluído para garantir que datagramas não fiquem circulando para sempre. Seu TTL é 
-        decrementado em uma unidade por cada processamento feito por roteadores, quando esse valor chega a zero, ele é descartado.
-        \\\\
-        \textbf{\textit{Protocolo}}: É usado somente quando um datagrama IP chega a seu destino final. O valor desse campo indica
-        o protocolo de cama de transporte específico ao qual a porção de dados desse datagrama IP deverá ser passada.
-        \\\\
-        \textbf{\textit{Soma de verificação do Cabecalho}}: Utilizado para auxiliar o roteador na detecção de erros de bits em
-        um datagrama IP recebido.
-        \\\\
-        \textbf{\textit{Endereços IP fonte e destino}}: Quando uma fonte cria um datagrama, insere seu endereço IP e o do destinatário.
-        Muitas vezes o hospedeiro fonte determina o endereço do destinatário por meio de DNS.
-        \\\\
-        \textbf{\textit{Opções}}: Campo em que permite que um cabeçalho IP seja ampliado.
-        \\\\
-        \textbf{\textit{Dados}}: Contém o segmento de camada de transporte a ser entregue ao destino (TCP ou UDP). Mas, também pode
-        carregar outros tipos de dados, como por exemplo o ICMP.
+        \subsubsection{Formato IPv4}
+            \textbf{\textit{Número da versão}}: São quatro bits que especificam a versão do protocolo IP do datagrama.
+            \\\\
+            \textbf{\textit{Comprimento do cabeçalho}}: O datagrama IPV4 pode conter um número variável de opções, esses quatro bits
+            são necessários para determinar onde os dados começam no pacote.
+            \\\\
+            \textbf{\textit{Tipo de serviço}}: Os bits de tipo de serviço servem para diferenciar os diferentes tipos de datagrama IP
+            que devem ser distinguidos uns dos outros.
+            \\\\
+            \textbf{\textit{Comprimento do datagrama (Fragmentação)}}:
+            É o comprimento total do datagrama IP medido em bytes. Esse campo tem 16 bits, então o tamanho máximo teórico do datagrama
+            IP é 65.535 bytes. No entano, raramente são maiores que 1.500 bytes.
+            \\\\
+            \textbf{\textit{Tempo de vida}}: É incluído para garantir que datagramas não fiquem circulando para sempre. Seu TTL é 
+            decrementado em uma unidade por cada processamento feito por roteadores, quando esse valor chega a zero, ele é descartado.
+            \\\\
+            \textbf{\textit{Protocolo}}: É usado somente quando um datagrama IP chega a seu destino final. O valor desse campo indica
+            o protocolo de cama de transporte específico ao qual a porção de dados desse datagrama IP deverá ser passada.
+            \\\\
+            \textbf{\textit{Soma de verificação do Cabecalho}}: Utilizado para auxiliar o roteador na detecção de erros de bits em
+            um datagrama IP recebido.
+            \\\\
+            \textbf{\textit{Endereços IP fonte e destino}}: Quando uma fonte cria um datagrama, insere seu endereço IP e o do destinatário.
+            Muitas vezes o hospedeiro fonte determina o endereço do destinatário por meio de DNS.
+            \\\\
+            \textbf{\textit{Opções}}: Campo em que permite que um cabeçalho IP seja ampliado.
+            \\\\
+            \textbf{\textit{Dados}}: Contém o segmento de camada de transporte a ser entregue ao destino (TCP ou UDP). Mas, também pode
+            carregar outros tipos de dados, como por exemplo o ICMP.
 
     \subsection{Fragmentação do Datagrama}
-    A fragmentação de um datagrama consiste na "separação" e na reconstrução de datagramas IP, de forma em que atenda a quantidade
-    máxima de bits que pode ser trafegada com um único pacote em um determinado enlace. Essa tarefa é desempenhada pelo roteador.
+        A fragmentação de um datagrama consiste na "separação" e na reconstrução de datagramas IP, de forma em que atenda a quantidade
+        máxima de bits que pode ser trafegada com um único pacote em um determinado enlace. Essa tarefa é desempenhada pelo roteador.
+        \\\\
+        O IPV6 não implementa a fragmentação, permitindo que as aplicações e o protocolo TCP desempenhem tal qual função ou algo equivalente.
+        \\\\
+        A fragmentação não é muito performática, pois o roteador deve ficar fragmentando e desfragmentando datagramas quase a todo 
+        momento.
+
+    \subsection{Endereçamento IPv4}
+        Um endereço IP sempre está atrelado à uma interface, isto é, a fronteira entre o hospedeiro e o enlace físico.
+        \\\\
+        Cada endereço IP tem comprimento de 32 bits (equivalente a 4 bytes). Portanto, há cerca de  4 bilhões de endereços IP
+        possíveis.
+        \\\\
+        Cada interface em cada hospedeiro e roteador da Internet global deve ter um endereço IP globalmente \textbf{exlusivo} (menos
+        as intefaces por trás de NATs). No entanto, uma parte do endereço IP de uma interface será determinada pela sub-rede onde 
+        ela está conectada.
+        
+        \subsubsection{Obtenção de um Bloco de Endereços}
+        Para obter um bloco de endereços IP, é necessário contatar seu ISP que forneceria endereços de um bloco de endereços que já
+        estão alocado a eles. O ISP, por sua vez, dividiria seu bloco de endereços em outros blocos.
+        \\\\
+        Como o endereçamento IP é considerávelmente excasso, surgiram técnicas como o NAT \textit{(Network Address Translation)}.
+
+        \subsubsection{DHCP}
+        É o a forma em que um hospedeiro obtém um endereço dinâmicamente de forma automática ao entrar em uma rede. Este protocolo 
+        é um processo de quatro etapas:
+        \\\\
+                I. \textit{Descoberta do servidor DHCP}
+        \\\\
+                II. \textit{Oferta dos servidores DHCP} 
+        \\\\
+                III. \textit{Solicitação DHCP}
+        \\\\
+                IV. \textit{DHCP ACK}
+
+    
+    \subsection{NAT}
+        É uma forma, não muito puritana, de obter endereços IPs extras. Então, para resolver o problema de números excassos de
+        endereços IPs (sem ter que utilizar IPv6), utiliza-se o NAT.
+        \\\\
+        É criado uma espécie de 'endereço interno' que só válidos dentro de uma determinada rede (ou sub-rede). O roteador então, será
+         o responsável por 'traduzir' para o IP real, ou seja, ele associa aquele IP interno ao IP válido externo.
+
+    \subsection{ICMP}
+    É um protocolo utilizado por hospedeiros e roteadores para efetuar comunicação de informações de camada de rede entre si. Geralemnte,
+    é utilizado em comunicação de erros.
     \\\\
-    O IPV6 não implementa a fragmentação, permitindo que as aplicações e o protocolo TCP desempenhem tal qual função ou algo equivalente.
+    As mensagems ICMP são formadas por: \textit{um campo de tipo} e \textit{um campo de código}.
     \\\\
-    A fragmentação não é muito performática, pois o roteador deve ficar fragmentando e desfragmentando datagramas quase a todo 
-    momento.
+    Dado um datagrama, cujo o TTL já expirou, isto é, chegou a zero. Quem avisará à rede que esse datagrama deve ser descartado é o ICMP.
+
+    \subsection{IPv6}
+    O IPv6 surge para atender a necessidade de maior espaço de endereçamento IP, onde no IPv4 já não é mais possível adquirir.
+    
+
+
+    \subsubsection{Datagrama IPv6}
+    Esse datagrama foi elaborado com enfoque para aplicações multimídia.
+    \\\\
+    As mudanças mais importantes introduzidas nessa versão ficam evidentes quando olhamos o seu formato de datagrama.
+    \\\\
+    \textbf{Capacidade de endereçamento espandida}: de 32 bits, para 128.
+    \\\\
+    \textbf{Cabeçalho aprimorado}: de 20 bytes para 40.
+    \\\\
+    Com a implementação no cabeçalho de um campo para a classe de tráfego e outro para o rótulo de fluxo, o datagrama IPv6 fica com uma 
+    implementação um tanto parecida com a di circuitos virtuais.
+    
+    \subsection{Segurança IP}
+        Com a segurança sendo a principal preocupação hoje, presquisadores começaram a desenvolver novos protocolos da camada de 
+        rede. Um desses é o \textbf{IPsec}.
+        \\\\
+        O IPsect foi desenvolvido para ser compatível tanto com IPv4 quanto IPv6.
+        \\\\
+        Características do IPsec: \textit{Acordo criptográfico, Codificação das cargas úteis do datagrama IP, Confidencialidade,
+        Garantia da integridade dos dados e Autenticação de origem.}
+
+
+
+
 
 \end{document}
