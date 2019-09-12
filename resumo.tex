@@ -127,44 +127,92 @@ pacote para transmitir a uma saída.
 O roteador possui várias portas de entradas e saídas, que são regidas pelo elemento de comutação, o qual é constituido por um processador de
 roteamento.
 
-\subsection{Porta de Entrada}
-O processamento na porta de entrada começa pela terminação de linha, em seguida é efetuado o desencapsulamento dos pacotes, logo após a consulta e o
-enfileiramento de repasse para a porta apropriada para poder entregar ao elemento de comutação.
+    \subsection{Porta de Entrada}
+    O processamento na porta de entrada começa pela terminação de linha, em seguida é efetuado o desencapsulamento dos pacotes, logo após a consulta e o
+    enfileiramento de repasse para a porta apropriada para poder entregar ao elemento de comutação.
 
-\subsection{Elemento de Comutação}
-Elemento/dispositivo que efetua a permutação da porta de entrada para a porta de saída.
-\\
-\\*
-Essa comutação pode ser feita de várias formas: \textit{por memório, barramento ou por uma rede de interconexão}
+        \subsection{Elemento de Comutação}
+        Elemento/dispositivo que efetua a permutação da porta de entrada para a porta de saída.
+        \\
+        \\*
+        Essa comutação pode ser feita de várias formas: \textit{por memório, barramento ou por uma rede de interconexão}
 
-\subsubsection{Comutação por Memória}
-O primeiros roteadores, em sua maioria, eram computadores tradicionais. Portanto, a comutação entre as portas de entrada e saída era realizada 
-sob o controle direto da CPU. Nesse cenário, as portas funcionavam como dispositivos de entrada e saída de um SO tradicional.
+        \subsubsection{Comutação por Memória}
+        O primeiros roteadores, em sua maioria, eram computadores tradicionais. Portanto, a comutação entre as portas de entrada e saída era realizada 
+        sob o controle direto da CPU. Nesse cenário, as portas funcionavam como dispositivos de entrada e saída de um SO tradicional.
 
-\subsubsection{Comutação por Barramento}
-Nessa abordagem, as portas de entrada transferem um pacote diretamente para a porta de saída por um barramento compartilhado sem a intervenção
-do processador de roteamento. No entanto, somente um pacote por vez pode ser transferido, uma vez que o barramento encontra-se ocupado.
+        \subsubsection{Comutação por Barramento}
+        Nessa abordagem, as portas de entrada transferem um pacote diretamente para a porta de saída por um barramento compartilhado sem a intervenção
+        do processador de roteamento. No entanto, somente um pacote por vez pode ser transferido, uma vez que o barramento encontra-se ocupado.
 
-\subsubsection{Comutação por Rede de Interconexão}
-Quase como a comutação por barramento, o que diferencia-se é a quantidade de barramentos, nesse caso são utilizado 2 ou mais, onde cada um 
-desses barramentos conectam \textbf{n} portas de entrada com \textbf{n} portas de saída
+        \subsubsection{Comutação por Rede de Interconexão}
+        Quase como a comutação por barramento, o que diferencia-se é a quantidade de barramentos, nesse caso são utilizado 2 ou mais, onde cada um 
+        desses barramentos conectam \textbf{n} portas de entrada com \textbf{n} portas de saída
 
 \subsection{Porta de Saída}
 O processamento na porta de saída começa com o gerenciamento de fila feito por um buffer, em seguida é efetuado o encapsulamento dos pacotes e por 
 fim há a terminação de linha.
 
-\subsubsection{Onde ocorre a formação de fila?}
-As filas podem se formar tanto nas portas de entrada, quanto nas de saída. A formação 
-da mesma, depende de alguns fatores: carga de tráfego, da velocidade relativa do 
-elemento de comutação e da taxa linha.
+    \subsubsection{Onde ocorre a formação de fila?}
+    As filas podem se formar tanto nas portas de entrada, quanto nas de saída. A formação 
+    da mesma, depende de alguns fatores: carga de tráfego, da velocidade relativa do 
+    elemento de comutação e da taxa linha.
+\\
+\\
+Um problema bastante conhecido é o \textbf{Bloqueio de cabeça da fila}, onde um datagrama enfileirado na frente da fila, impede
+que outros datagramas sigam fila adiante.
 
 \newpage
+
 \section{Protocolo de Internet (IP)}
 Existem alguns componentes que formam a camada de rede na Internet. O primeiro é o IP e o
 segundo é o roteamento, que determina o caminho que um datagrama segue desde a origem ao
 seu destino. Os protocolos de roteamento calculam as tabelas de repasse que são usadas
 para transmitir pacotes pela rede. O último componente é um dispositivo de comunicação
 de erros em datagramas e para atender requisições de certas informações da camada de 
-rede (ICMP)s.
+rede (ICMP). 
+
+    \subsection{Formato do datagrama}
+    O datagrama desempenha um papel central na Internet.
+
+        \subsubsection{IPV4}
+        \textbf{\textit{Número da versão}}: São quatro bits que especificam a versão do protocolo IP do datagrama.
+        \\
+        \\
+        \textbf{\textit{Comprimento do cabeçalho}}: O datagrama IPV4 pode conter um número variável de opções, esses quatro bits
+        são necessários para determinar onde os dados começam no pacote.
+        \\
+        \\
+        \textbf{\textit{Tipo de serviço}}: Os bits de tipo de serviço servem para diferenciar os diferentes tipos de datagrama IP
+        que devem ser distinguidos uns dos outros.
+        \\
+        \\
+        \textbf{\textit{Comprimento do datagrama}}:
+        É o comprimento total do datagrama IP medido em bytes. Esse campo tem 16 bits, então o tamanho máximo teórico do datagrama
+        IP é 65.535 bytes. No entano, raramente são maiores que 1.500 bytes.
+        \\
+        \\
+        \textbf{\textit{Tempo de vida}}: É incluído para garantir que datagramas não fiquem circulando para sempre. Seu TTL é 
+        decrementado em uma unidade por cada processamento feito por roteadores, quando esse valor chega a zero, ele é descartado.
+        \\
+        \\
+        \textbf{\textit{Protocolo}}: É usado somente quando um datagrama IP chega a seu destino final. O valor desse campo indica
+        o protocolo de cama de transporte específico ao qual a porção de dados desse datagrama IP deverá ser passada.
+        \\
+        \\
+        \textbf{\textit{Soma de verificação do Cabecalho}}: Utilizado para auxiliar o roteador na detecção de erros de bits em
+        um datagrama IP recebido.
+        \\
+        \\
+        \textbf{\textit{Endereços IP fonte e destino}}: Quando uma fonte cria um datagrama, insere seu endereço IP e o do destinatário.
+        Muitas vezes o hospedeiro fonte determina o endereço do destinatário por meio de DNS.
+        \\
+        \\
+        \textbf{\textit{Opções}}: Campo em que permite que um cabeçalho IP seja ampliado.
+        \\
+        \\
+        \textbf{\textit{Dados}}: Contém o segmento de camada de transporte a ser entregue ao destino (TCP ou UDP). Mas, também pode
+        carregar outros tipos de dados, como por exemplo o ICMP.
+
 
 \end{document}
