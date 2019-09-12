@@ -103,15 +103,12 @@ hospedeiros de origem e destino. O qual contém um número para cada enlace e re
 
     \subsubsection{Estabelecimento do Circuito virtual}
     O estabelecimento de um circuito virtual é consistido por três fases:
-        \\
-        \\*
+        \\\\*
         I. \textbf{Estabelecimento de CV}: A camada de transporte remetente contata a camada de rede especificando o endereço do destinatário.
         Depois, a camada de rede determina o caminho entre o remetente e destinatário.
-        \\
-        \\*
+        \\\\*
         II. \textbf{Transferência de dados}: Fluxo dos pacotes entre os hospedeiros.
-        \\
-        \\*
+        \\\\*
         III. \textbf{Encerramento do CV}: O encerramento começa quando um dos hospedeiros avisa à camada de rede seu desejo de desativar o CV.
         A camada de rede então, informa ao sistema final do outro lado sob o fim da conexão e atualiza as tabelas de repasse de cada um dos
         roteadores.
@@ -133,8 +130,7 @@ roteamento.
 
         \subsection{Elemento de Comutação}
         Elemento/dispositivo que efetua a permutação da porta de entrada para a porta de saída.
-        \\
-        \\*
+        \\\\*
         Essa comutação pode ser feita de várias formas: \textit{por memório, barramento ou por uma rede de interconexão}
 
         \subsubsection{Comutação por Memória}
@@ -157,10 +153,10 @@ fim há a terminação de linha.
     As filas podem se formar tanto nas portas de entrada, quanto nas de saída. A formação 
     da mesma, depende de alguns fatores: carga de tráfego, da velocidade relativa do 
     elemento de comutação e da taxa linha.
-\\
-\\
-Um problema bastante conhecido é o \textbf{Bloqueio de cabeça da fila}, onde um datagrama enfileirado na frente da fila, impede
-que outros datagramas sigam fila adiante.
+    \\
+    \\
+    Um problema bastante conhecido é o \textbf{Bloqueio de cabeça da fila}, onde um datagrama enfileirado na frente da fila, impede
+    que outros datagramas sigam fila adiante.
 
 \newpage
 
@@ -177,42 +173,41 @@ rede (ICMP).
 
         \subsubsection{IPV4}
         \textbf{\textit{Número da versão}}: São quatro bits que especificam a versão do protocolo IP do datagrama.
-        \\
-        \\
+        \\\\
         \textbf{\textit{Comprimento do cabeçalho}}: O datagrama IPV4 pode conter um número variável de opções, esses quatro bits
         são necessários para determinar onde os dados começam no pacote.
-        \\
-        \\
+        \\\\
         \textbf{\textit{Tipo de serviço}}: Os bits de tipo de serviço servem para diferenciar os diferentes tipos de datagrama IP
         que devem ser distinguidos uns dos outros.
-        \\
-        \\
-        \textbf{\textit{Comprimento do datagrama}}:
+        \\\\
+        \textbf{\textit{Comprimento do datagrama (Fragmentação)}}:
         É o comprimento total do datagrama IP medido em bytes. Esse campo tem 16 bits, então o tamanho máximo teórico do datagrama
         IP é 65.535 bytes. No entano, raramente são maiores que 1.500 bytes.
-        \\
-        \\
+        \\\\
         \textbf{\textit{Tempo de vida}}: É incluído para garantir que datagramas não fiquem circulando para sempre. Seu TTL é 
         decrementado em uma unidade por cada processamento feito por roteadores, quando esse valor chega a zero, ele é descartado.
-        \\
-        \\
+        \\\\
         \textbf{\textit{Protocolo}}: É usado somente quando um datagrama IP chega a seu destino final. O valor desse campo indica
         o protocolo de cama de transporte específico ao qual a porção de dados desse datagrama IP deverá ser passada.
-        \\
-        \\
+        \\\\
         \textbf{\textit{Soma de verificação do Cabecalho}}: Utilizado para auxiliar o roteador na detecção de erros de bits em
         um datagrama IP recebido.
-        \\
-        \\
+        \\\\
         \textbf{\textit{Endereços IP fonte e destino}}: Quando uma fonte cria um datagrama, insere seu endereço IP e o do destinatário.
         Muitas vezes o hospedeiro fonte determina o endereço do destinatário por meio de DNS.
-        \\
-        \\
+        \\\\
         \textbf{\textit{Opções}}: Campo em que permite que um cabeçalho IP seja ampliado.
-        \\
-        \\
+        \\\\
         \textbf{\textit{Dados}}: Contém o segmento de camada de transporte a ser entregue ao destino (TCP ou UDP). Mas, também pode
         carregar outros tipos de dados, como por exemplo o ICMP.
 
+    \subsection{Fragmentação do Datagrama}
+    A fragmentação de um datagrama consiste na "separação" e na reconstrução de datagramas IP, de forma em que atenda a quantidade
+    máxima de bits que pode ser trafegada com um único pacote em um determinado enlace. Essa tarefa é desempenhada pelo roteador.
+    \\\\
+    O IPV6 não implementa a fragmentação, permitindo que as aplicações e o protocolo TCP desempenhem tal qual função ou algo equivalente.
+    \\\\
+    A fragmentação não é muito performática, pois o roteador deve ficar fragmentando e desfragmentando datagramas quase a todo 
+    momento.
 
 \end{document}
